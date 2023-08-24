@@ -17,7 +17,7 @@ model User {
   document     String?
   email        String   @unique
   phone_number String
-  birth_date   DateTime @db.Date
+  birth_date   Date     @db.Date
   created_at   DateTime @default(now())
   updated_at   DateTime @updatedAt
 }

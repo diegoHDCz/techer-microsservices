@@ -11,10 +11,7 @@ export declare class UsersService {
         where?: Prisma.UserWhereInput;
         orderBy?: Prisma.UserOrderByWithRelationInput;
     }): Promise<User[] | null>;
-    findOne(userWhereUniqueInput: Prisma.UserWhereUniqueInput): Promise<User | null>;
-    update(params: {
-        where: Prisma.UserWhereUniqueInput;
-        data: Prisma.UserUpdateInput;
-    }): Promise<User>;
-    remove(where: Prisma.UserWhereUniqueInput): Promise<User>;
+    findOne(id: Prisma.UserWhereInput): Promise<User | null>;
+    update(id: Prisma.UserWhereUniqueInput, data: Prisma.UserUpdateInput): Promise<User>;
+    remove(id: Prisma.UserWhereUniqueInput): Promise<void>;
 }

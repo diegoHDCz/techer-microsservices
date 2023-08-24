@@ -29,21 +29,18 @@ let UsersService = exports.UsersService = class UsersService {
             orderBy,
         });
     }
-    async findOne(userWhereUniqueInput) {
-        return await this.prisma.user.findUnique({
-            where: userWhereUniqueInput,
-        });
+    async findOne(id) {
+        return await this.prisma.user.findFirst({ where: { id: Number(id) } });
     }
-    async update(params) {
-        const { where, data } = params;
+    async update(id, data) {
         return await this.prisma.user.update({
             data,
-            where,
+            where: { id: Number(id) },
         });
     }
-    async remove(where) {
-        return await this.prisma.user.delete({
-            where,
+    async remove(id) {
+        await this.prisma.user.delete({
+            where: { id: Number(id) },
         });
     }
 };

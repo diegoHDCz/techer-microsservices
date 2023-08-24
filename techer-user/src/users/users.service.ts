@@ -1,11 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma, User } from '@prisma/client';
+
 import { PrismaService } from 'src/prisma/prisma/prisma.service';
 
 @Injectable()
 export class UsersService {
   constructor(private prisma: PrismaService) {}
-  async create(data: Prisma.UserCreateInput) {
+
+  async create(data: Prisma.UserCreateInput): Promise<void> {
     await this.prisma.user.create({ data });
   }
 
@@ -26,28 +28,23 @@ export class UsersService {
     });
   }
 
-  async findOne(
-    userWhereUniqueInput: Prisma.UserWhereUniqueInput,
-  ): Promise<User | null> {
-    return await this.prisma.user.findUnique({
-      where: userWhereUniqueInput,
-    });
+  async findOne(id: Prisma.UserWhereInput): Promise<User | null> {
+    return await this.prisma.user.findFirst({ where: { id: Number(id) } });
   }
 
-  async update(params: {
-    where: Prisma.UserWhereUniqueInput;
-    data: Prisma.UserUpdateInput;
-  }): Promise<User> {
-    const { where, data } = params;
+  async update(
+    id: Prisma.UserWhereUniqueInput,
+    data: Prisma.UserUpdateInput,
+  ): Promise<User> {
     return await this.prisma.user.update({
       data,
-      where,
+      where: { id: Number(id) },
     });
   }
 
-  async remove(where: Prisma.UserWhereUniqueInput): Promise<User> {
-    return await this.prisma.user.delete({
-      where,
+  async remove(id: Prisma.UserWhereUniqueInput): Promise<void> {
+    await this.prisma.user.delete({
+      where: { id: Number(id) },
     });
   }
 }
