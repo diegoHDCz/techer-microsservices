@@ -1,6 +1,6 @@
 CREATE EXTENSION IF NOT EXISTS pgcrypto;
 -- CreateTable
-CREATE  TABLE "User" (
+CREATE IF NOT EXISTS  TABLE "User" (
     "id" SERIAL NOT NULL,
     "first_name" TEXT NOT NULL,
     "last_name" TEXT NOT NULL,
